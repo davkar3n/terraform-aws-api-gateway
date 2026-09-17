@@ -19,32 +19,34 @@ output "api_gateway_rest_api_execution_arn" {
 }
 
 output "api_gateway_rest_api_stage_arn" {
-  description = "Arn of the deployed stage(s)."
-  value       = aws_api_gateway_stage.this[0].arn
+  description = "Arn of the deployed stage."
+  value       = try(aws_api_gateway_stage.this[0].arn, null)
 }
 
 output "api_gateway_rest_api_stage_id" {
-  description = "Id of the deployed stage(s)."
-  value       = aws_api_gateway_stage.this[0].id
+  description = "Id of the deployed stage."
+  value       = try(aws_api_gateway_stage.this[0].id, null)
 }
 
 output "api_gateway_rest_api_stage_invoke_url" {
-  description = "Invoke URL of the deployed stage(s)."
-  value       = aws_api_gateway_stage.this[0].invoke_url
+  description = "Invoke URL of the deployed stage."
+  value       = try(aws_api_gateway_stage.this[0].invoke_url, null)
 }
 
 output "api_gateway_rest_api_stage_execution_arn" {
-  description = "Execution arn of the deployed stage(s)."
-  value       = aws_api_gateway_stage.this[0].execution_arn
+  description = "Execution arn of the deployed stage."
+  value       = try(aws_api_gateway_stage.this[0].execution_arn, null)
 }
 
 output "api_gateway_rest_api_stage_web_acl" {
-  description = "WAF Access Control List for the stage(s)"
-  value       = aws_api_gateway_stage.this[0].web_acl_arn
+  description = "WAF Access Control List for the stage."
+  value       = try(aws_api_gateway_stage.this[0].web_acl_arn, null)
 }
 
 output "aws_api_gateway_domain_name" {
-  description = "api gateway domain name"
-  value       = { for k, v in aws_api_gateway_domain_name.regional_acm : k => v }
-  sensitive   = true
+  description = "API Gateway domain name."
+  value       = {
+    for k, v in aws_api_gateway_domain_name.regional_acm : k => v
+  }
+  sensitive = true
 }
