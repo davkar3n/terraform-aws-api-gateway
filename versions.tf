@@ -4,7 +4,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = ">= 5.5.0, < 5.75.0"
+      version = ">= 5.5.0"
     }
 
     # Uncomment the lines below to generate the docs with the requirement
